@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaques's Monologue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@1&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .title-container {
+            text-align: center;
+            margin: 40px auto 20px auto;
+            padding: 0 20px;
+        }
+
+        .title-container h1 {
+            font-family: 'Great Vibes', cursive;
+            font-weight: normal;
+            font-size: 4.5em;
+            margin: 0;
+            color: #800020;
+        }
+
+        .title-container .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.2em;
+            margin: 8px 0;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        #video-container {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            border: 15px solid #800020;
+            box-sizing: border-box;
+        }
+
+        video {
+            width: 100%;
+        }
+
+        #subtitles {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 5em;
+        }
+
+        .original-text,
+        .translation-text {
+            margin-bottom: 10px;
+        }
+
+        .original-text {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title-container">
+        <h1>Jaques's Monologue</h1>
+        <p class="subtitle">From William Shakespeare's play <em>As You Like It</em> (Act 2, Scene 7)</p>
+        <p class="subtitle">Performed by Tim McMullan in 2011 at Shakespeare's Globe</p>
+        <p class="subtitle">Modern English translation, Panagiotis Domvros, English and Drama Teacher</p>
+    </div>
+
+    <div id="video-container">
+        <video id="jaques-video" controls>
+            <source src="All the world.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div id="subtitles">
+        <p class="original-text"></p>
+        <p class="translation-text"></p>
+    </div>
+
+    <script>
+        const video = document.getElementById('jaques-video');
+        const originalTextElement = document.querySelector('.original-text');
+        const translationTextElement = document.querySelector('.translation-text');
+
+        // Subtitles with corrected timestamp conversions
+        const subtitles = [
+            {
+                start: 14,
+                end: 24,
+                original: "All the world's a stage, and all the men and women merely players.",
+                translation: "The whole world is a theater, and all the people are simply actors."
+            },
+            {
+                start: 24,
+                end: 33,
+                original: "They have their exits and their entrances, and one man in his time plays many parts, His acts being seven ages.",
+                translation: "They come and go from the stage of life, and each person plays several roles throughout their lifetime, with these acts being seven stages."
+            },
+            {
+                start: 33,
+                end: 39,
+                original: "At first the infant, mewling, and puking in the nurse's arms.",
+                translation: "First, the infant, crying and vomiting in his nurse's arms."
+            },
+            {
+                start: 39,
+                end: 56,
+                original: "And then, the whining school-boy, with his satchel and shining morning face, creeping like snail unwillingly to school.",
+                translation: "Then, the complaining schoolboy with his bag and bright morning face, crawling like a snail, unwilling to go to school."
+            },
+            {
+                start: 56,
+                end: 63, // Corrected from 103
+                original: "And then the lover, sighing like furnace, with a woeful ballad made to his mistress' eyebrow.",
+                translation: "Next, the lover, sighing as hot as a furnace, with a sad poem written about his beloved's eyebrow."
+            },
+            {
+                start: 63, // Corrected from 103
+                end: 68,
+                original: "Then a soldier, full of strange oaths, and bearded like the pard.",
+                translation: "Then, a soldier, full of strange curses and bearded like a leopard."
+            },
+            {
+                start: 68,
+                end: 75,
+                original: "Jealous in honour, sudden and quick in quarrel seeking the bubble reputation even in the cannon's mouth.",
+                translation: "Protective of his honor, quick to fight, chasing a fleeting reputation even when facing a cannon."
+            },
+            {
+                start: 75,
+                end: 89,
+                original: "And then, the justice, in fair round belly with good capon lined, with eyes severe and beard of formal cut, full of wise saws, and modern instances.",
+                translation: "And then the judge, with a large round belly lined with fine chicken, with stern eyes, a formal beard, and full of wise sayings and contemporary examples."
+            },
+            {
+                start: 89,
+                end: 93,
+                original: "And so he plays his part.",
+                translation: "And that is the role he plays."
+            },
+            {
+                start: 93,
+                end: 109,
+                original: "The sixth age, shifts into the lean and slipper'd pantaloon, with spectacles on nose and pouch on side, his youthful hose well saved a world too wide for his shrunk shanks.",
+                translation: "The sixth stage transforms him into a thin old man in slippers, with glasses on his nose and a pouch at his side; his youthful stockings, saved for a long time, are much too large for his shrunken legs."
+            },
+            {
+                start: 109,
+                end: 119,
+                original: "And his big manly voice turning again towards childish treble, pipes and whistles in his sound.",
+                translation: "And his deep, manly voice, turning back toward a high-pitched childish tone, whistles as he speaks."
+            },
+            {
+                start: 119,
+                end: 133,
+                original: "Last scene of all, that ends this strange, eventful history, is second childishness, and mere oblivion.",
+                translation: "The very last scene, which ends this strange and eventful life story, is a second childhood and complete forgetfulness."
+            },
+            {
+                start: 133,
+                end: 140, // End time estimated
+                original: "Sans teeth, sans eyes, sans taste, sans everything.",
+                translation: "Without teeth, without sight, without taste, without anything at all."
+            }
+        ];
+
+        let lastSubtitle = null;
+
+        video.addEventListener('timeupdate', () => {
+            const currentTime = video.currentTime;
+            let currentSubtitle = null;
+
+            for (const subtitle of subtitles) {
+                if (currentTime >= subtitle.start && currentTime <= subtitle.end) {
+                    currentSubtitle = subtitle;
+                    break;
+                }
+            }
+
+            // This prevents constantly rewriting the same text to the DOM
+            if (currentSubtitle !== lastSubtitle) {
+                if (currentSubtitle) {
+                    originalTextElement.innerHTML = currentSubtitle.original;
+                    translationTextElement.innerHTML = currentSubtitle.translation;
+                } else {
+                    originalTextElement.innerHTML = "";
+                    translationTextElement.innerHTML = "";
+                }
+                lastSubtitle = currentSubtitle;
+            }
+        });
+    </script>
+</body>
+</html>
