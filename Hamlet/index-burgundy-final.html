@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamlet's Soliloquy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@1&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .title-container {
+            text-align: center;
+            margin: 40px auto 20px auto;
+            padding: 0 20px;
+        }
+
+        .title-container h1 {
+            font-family: 'Great Vibes', cursive;
+            font-weight: normal;
+            font-size: 4.5em;
+            margin: 0;
+            /* Changed title color to burgundy */
+            color: #800020;
+        }
+
+        .title-container .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.2em;
+            margin: 8px 0;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        #video-container {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            /* Added a sizeable burgundy border */
+            border: 15px solid #800020;
+            box-sizing: border-box;
+        }
+
+        video {
+            width: 100%;
+        }
+
+        #subtitles {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 5em;
+        }
+
+        .original-text,
+        .translation-text {
+            margin-bottom: 10px;
+        }
+
+        .original-text {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title-container">
+        <h1>Hamlet's Soliloquy</h1>
+        <p class="subtitle">From William Shakespeare's play <em>The Tragedy of Hamlet, Prince of Denmark</em> (Act 3, Scene 1)</p>
+        <p class="subtitle">Performed by Ben Whishaw in 2004 at the Old Vic Theatre</p>
+        <p class="subtitle">Modern English translation, Panagiotis Domvros, English and Drama Teacher</p>
+    </div>
+
+    <div id="video-container">
+        <video id="hamlet-video" controls>
+            <source src="Ben Whishaw Hamlet's Soliloquy.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div id="subtitles">
+        <p class="original-text"></p>
+        <p class="translation-text"></p>
+    </div>
+
+    <script>
+        const video = document.getElementById('hamlet-video');
+        const originalTextElement = document.querySelector('.original-text');
+        const translationTextElement = document.querySelector('.translation-text');
+
+        // Capitalization corrected to follow modern punctuation rules.
+        const subtitles = [
+            {
+                start: 33,
+                end: 45,
+                original: "To be, or not to be? That is the question—",
+                translation: "To live, or to die? That is the question."
+            },
+            {
+                start: 46,
+                end: 52,
+                original: "whether ’tis nobler in the mind to suffer the slings and arrows of outrageous fortune,",
+                translation: "Is it nobler to suffer through all the terrible things fate throws at you,"
+            },
+            {
+                start: 53,
+                end: 67,
+                original: "or to take arms against a sea of troubles, and, by opposing, end them?",
+                translation: "or to fight off your troubles, and, in doing so, end them completely?"
+            },
+            {
+                start: 68,
+                end: 77,
+                original: "To die, to sleep— no more—",
+                translation: "To die, to sleep—because that’s all dying is—"
+            },
+            {
+                start: 78,
+                end: 84,
+                original: "and by a sleep to say we end the heartache and the thousand natural shocks that flesh is heir to—",
+                translation: "and by a sleep I mean an end to all the heartache and the thousand injuries that we are vulnerable to—"
+            },
+            {
+                start: 85,
+                end: 90,
+                original: "’tis a consummation devoutly to be wished!",
+                translation: "that’s an end to be wished for!"
+            },
+            {
+                start: 91,
+                end: 109,
+                original: "To die, to sleep. To sleep, perchance to dream—ay, there’s the rub,",
+                translation: "To die, to sleep. To sleep, perhaps to dream—yes, but there’s there’s the catch."
+            },
+            {
+                start: 110,
+                end: 125,
+                original: "for in that sleep of death what dreams may come when we have shuffled off this mortal coil, must give us pause.",
+                translation: "Because the kinds of dreams that might come in that sleep of death—after you have left behind your mortal body—are something to make you anxious."
+            },
+            {
+                start: 126,
+                end: 129,
+                original: "There’s the respect that makes calamity of so long life.",
+                translation: "That’s the consideration that makes us suffer the calamities of life for so long."
+            },
+            {
+                start: 130,
+                end: 143,
+                original: "For who would bear the whips and scorns of time, th’ oppressor’s wrong, the proud man’s contumely,",
+                translation: "Because who would bear all the trials and tribulations of time—the oppression of the powerful, the insults from arrogant men,"
+            },
+            {
+                start: 143.5,
+                end: 153,
+                original: "the pangs of despised love, the law’s delay, the insolence of office, and the spurns that patient merit of th’ unworthy takes,",
+                translation: "the pangs of unrequited love, the slowness of justice, the disrespect of people in office, and the general abuse of good people by bad—"
+            },
+            {
+                start: 153.5,
+                end: 159.5,
+                original: "when he himself might his quietus make with a bare bodkin?",
+                translation: "when you could just settle all your debts using nothing more than an unsheathed dagger?"
+            },
+            {
+                start: 160.5,
+                end: 164.5,
+                original: "Who would fardels bear, to grunt and sweat under a weary life,",
+                translation: "Who would bear his burdens, and grunt and sweat through a tiring life,"
+            },
+            {
+                start: 165.5,
+                end: 190.5,
+                original: "but that the dread of something after death, the undiscovered country from whose bourn no traveler returns, puzzles the will and makes us rather bear those ills we have than fly to others that we know not of?",
+                translation: "if they weren’t frightened of what might happen after death—that undiscovered country from which no visitor returns, which we wonder about and which makes us prefer the troubles we know rather than fly off to face the ones we don’t?"
+            },
+            {
+                start: 191.5,
+                end: 199,
+                original: "Thus conscience does make cowards of us all,",
+                translation: "Thus, the fear of death makes us all cowards,"
+            },
+            {
+                start: 199.5,
+                end: 206,
+                original: "and thus the native hue of resolution is sicklied o’er with the pale cast of thought,",
+                translation: "and our natural willingness to act is made weak by too much thinking."
+            },
+            {
+                start: 206.5,
+                end: 222.5,
+                original: "and enterprises of great pitch and moment with this regard their currents turn awry, and lose the name of action.",
+                translation: "Actions of great urgency and importance get thrown off course because of this sort of thinking, and they cease to be actions at all."
+            }
+        ];
+
+        let lastSubtitle = null;
+
+        video.addEventListener('timeupdate', () => {
+            const currentTime = video.currentTime;
+            let currentSubtitle = null;
+
+            for (const subtitle of subtitles) {
+                if (currentTime >= subtitle.start && currentTime <= subtitle.end) {
+                    currentSubtitle = subtitle;
+                    break;
+                }
+            }
+
+            // This prevents constantly rewriting the same text to the DOM
+            if (currentSubtitle !== lastSubtitle) {
+                if (currentSubtitle) {
+                    originalTextElement.innerHTML = currentSubtitle.original;
+                    translationTextElement.innerHTML = currentSubtitle.translation;
+                } else {
+                    originalTextElement.innerHTML = "";
+                    translationTextElement.innerHTML = "";
+                }
+                lastSubtitle = currentSubtitle;
+            }
+        });
+    </script>
+</body>
+</html>
