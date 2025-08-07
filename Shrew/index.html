@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katharina's Monologue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@1&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .title-container {
+            text-align: center;
+            margin: 40px auto 20px auto;
+            padding: 0 20px;
+        }
+
+        .title-container h1 {
+            font-family: 'Great Vibes', cursive;
+            font-weight: normal;
+            font-size: 4.5em;
+            margin: 0;
+            color: #800020;
+        }
+
+        .title-container .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.2em;
+            margin: 8px 0;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        #video-container {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            border: 15px solid #800020;
+            box-sizing: border-box;
+        }
+
+        video {
+            width: 100%;
+        }
+
+        #subtitles {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 5em;
+        }
+
+        .original-text,
+        .translation-text {
+            margin-bottom: 10px;
+        }
+
+        .original-text {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title-container">
+        <h1>Katharina's Monologue</h1>
+        <p class="subtitle">From William Shakespeare's play <em>The Taming of the Shrew</em> (Act 5, Scene 2)</p>
+        <p class="subtitle">Performed by Thalissa Teixeira in 2024 at Shakespeare's Globe</p>
+        <p class="subtitle">Modern English translation, Panagiotis Domvros, English and Drama Teacher</p>
+    </div>
+
+    <div id="video-container">
+        <video id="shrew-video" controls>
+            <source src="Shrew.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div id="subtitles">
+        <p class="original-text"></p>
+        <p class="translation-text"></p>
+    </div>
+
+    <script>
+        const video = document.getElementById('shrew-video');
+        const originalTextElement = document.querySelector('.original-text');
+        const translationTextElement = document.querySelector('.translation-text');
+        
+        const subtitles = [
+            { start: 1, end: 4, original: "[Katharina] Thy husband is thy lord.", translation: "[Katharina] Your husband is your lord." },
+            { start: 5, end: 33, original: "[Katharina] Thy life, thy keeper, thy head, thy sovereign, one that cares for thee, and for thy maintenance commits his body to painful labour both by sea and land, to watch the night in storms, the day in cold, while thou liest warm at home, secure and safe.", translation: "[Katharina] Your life, your protector, your leader, your king; one who cares for you and, for your well-being, puts his body through painful work on both sea and land, staying up through stormy nights and cold days, while you lie warm, safe, and secure at home." },
+            { start: 34, end: 44, original: "[Katharina] And craves no other tribute at thy hands but love, fair looks and true obedience.", translation: "[Katharina] And he asks for no payment from you other than love, kind looks, and true obedience." },
+            { start: 45, end: 47, original: "[Katharina] Too little payment for so great a debt.", translation: "[Katharina] That’s too small a payment for such a great debt." },
+            { start: 48, end: 57, original: "[Katharina] Such duty as the subject owes the prince Even such a woman owes to her husband.", translation: "[Katharina] The same duty that a subject owes to a prince, a woman owes to her husband." },
+            { start: 58, end: 65, original: "[Katharina] And while she is forward, peevish, sullen, sour and not obedient to his honest will, what is she?", translation: "[Katharina] And when she is defiant, irritable, gloomy, bitter, and not obedient to his honorable requests, what is she?" },
+            { start: 66, end: 73, original: "[Katharina] What is she but a foul contending rebel and graceless traitor to her loving lord?", translation: "[Katharina] What is she but a vile, argumentative rebel and a dishonorable traitor to her loving lord?" },
+            { start: 74, end: 87, original: "[Katharina] I am ashamed that women are so simple to offer war when they should kneel for peace.", translation: "[Katharina] I am ashamed that women are foolish enough to start a war when they should be kneeling for peace." },
+            { start: 88, end: 99, original: "[Katharina] To seek for rule, supremacy and sway, when they are bound to serve, love and obey.", translation: "[Katharina] To seek power, supremacy, and control, when they are obligated to serve, love, and obey." },
+            { start: 100, end: 119, original: "[Katharina] Why are our bodies soft and weak and smooth, unapt to toil and trouble in the world, But that our soft conditions and our hearts should well agree with our external parts?", translation: "[Katharina] Why are our bodies soft, weak, and smooth, not suited for hard work and trouble in the world, if not so that our gentle inner nature and our hearts should match our outward appearance?" },
+            { start: 120, end: 129, original: "[Katharina] Come, come, you froward and unable worm.", translation: "[Katharina] Come on, you defiant and helpless creature." },
+            { start: 130, end: 139, original: "[Katharina] My mind hath been as big as one of yours, my heart as great, my reason haply more, To bandy word for word and frown for frown.", translation: "[Katharina] My spirit has been as proud as yours, my heart as strong, my reasoning perhaps even greater, to argue word for word and frown for frown." },
+            { start: 140, end: 160, original: "[Katharina] But now I see our lances are but straws, our strength as weak, our weakness past compare, That seeming to be most which we indeed least are.", translation: "[Katharina] But now I see that our weapons are just straws, our strength is weak, and our weakness is beyond comparison, so that we appear to be strongest when we are, in fact, the weakest." },
+            { start: 161, end: 183, original: "[Katharina] Then vail your stomachs, for it is no boot, and place your hands below your husband's foot: In token of which duty, if he please, my hand is ready; may it do him ease.", translation: "[Katharina] Then let go of your pride, for it is pointless, and place your hands beneath your husband's foot as a sign of your duty; if he wishes, my hand is ready to offer him comfort." }
+        ];
+
+        let lastSubtitle = null;
+
+        if (video) {
+            video.addEventListener('timeupdate', () => {
+                const currentTime = video.currentTime;
+                let currentSubtitle = null;
+
+                for (const subtitle of subtitles) {
+                    if (currentTime >= subtitle.start && currentTime <= subtitle.end) {
+                        currentSubtitle = subtitle;
+                        break;
+                    }
+                }
+
+                if (currentSubtitle !== lastSubtitle) {
+                    if (currentSubtitle) {
+                        originalTextElement.innerHTML = currentSubtitle.original;
+                        translationTextElement.innerHTML = currentSubtitle.translation;
+                    } else {
+                        originalTextElement.innerHTML = "";
+                        translationTextElement.innerHTML = "";
+                    }
+                    lastSubtitle = currentSubtitle;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
