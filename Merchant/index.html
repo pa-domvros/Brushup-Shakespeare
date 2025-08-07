@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shylock's Monologue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@1&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .title-container {
+            text-align: center;
+            margin: 40px auto 20px auto;
+            padding: 0 20px;
+        }
+
+        .title-container h1 {
+            font-family: 'Great Vibes', cursive;
+            font-weight: normal;
+            font-size: 4.5em;
+            margin: 0;
+            color: #800020;
+        }
+
+        .title-container .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.2em;
+            margin: 8px 0;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        #video-container {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            border: 15px solid #800020;
+            box-sizing: border-box;
+        }
+
+        video {
+            width: 100%;
+        }
+
+        #subtitles {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 5em;
+        }
+
+        .original-text,
+        .translation-text {
+            margin-bottom: 10px;
+        }
+
+        .original-text {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title-container">
+        <h1>Shylock's Monologue</h1>
+        <p class="subtitle">From William Shakespeare's play <em>The Merchant of Venice</em> (Act 3, Scene 1)</p>
+        <p class="subtitle">Performed by Adrian Schiller in 2022 at Shakespeare's Globe</p>
+        <p class="subtitle">Modern English translation, Panagiotis Domvros, English and Drama Teacher</p>
+    </div>
+
+    <div id="video-container">
+        <video id="merchant-video" controls>
+            <source src="Merchant.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div id="subtitles">
+        <p class="original-text"></p>
+        <p class="translation-text"></p>
+    </div>
+
+    <script>
+        const video = document.getElementById('merchant-video');
+        const originalTextElement = document.querySelector('.original-text');
+        const translationTextElement = document.querySelector('.translation-text');
+        
+        const subtitles = [
+            {
+                start: 3, end: 6,
+                original: "[Shylock] Hath not a Jew eyes?",
+                translation: "[Shylock] Doesn't a Jew have eyes?"
+            },
+            {
+                start: 7, end: 22,
+                original: "[Shylock] Hath not a Jew hands? Organs, dimensions, senses, affections, passions?",
+                translation: "[Shylock] Doesn't a Jew have hands? Organs, measurements, senses, feelings, and passions?"
+            },
+            {
+                start: 23, end: 46,
+                original: "[Shylock] Fed with the same food, hurt with the same weapons, subject to the same diseases, healed by the same means, warmed and cooled by the same winter and summer as a Christian is?",
+                translation: "[Shylock] Isn't a Jew fed with the same food, hurt by the same weapons, subject to the same illnesses, healed by the same medicines, and kept warm and cool by the same winter and summer as a Christian is?"
+            },
+            {
+                start: 47, end: 53,
+                original: "[Shylock] If you prick us, do we not bleed?",
+                translation: "[Shylock] If you prick us, don't we bleed?"
+            },
+            {
+                start: 54, end: 61,
+                original: "[Shylock] If you tickle us, do we not laugh?",
+                translation: "[Shylock] If you tickle us, don't we laugh?"
+            },
+            {
+                start: 62, end: 68,
+                original: "[Shylock] If you poison us, do we not die?",
+                translation: "[Shylock] If you poison us, don't we die?"
+            },
+            {
+                start: 69, end: 78,
+                original: "[Shylock] And if you wrong us, shall we not revenge?",
+                translation: "[Shylock] And if you do us wrong, shall we not get revenge?"
+            },
+            {
+                start: 79, end: 87,
+                original: "[Shylock] If we are like you in the rest we shall resemble you in that.",
+                translation: "[Shylock] If we are like you in everything else, we will be like you in that too."
+            },
+            {
+                start: 88, end: 95,
+                original: "[Shylock] If a Jew wrong a Christian, what's his humility? Revenge.",
+                translation: "[Shylock] If a Jew wrongs a Christian, what is his forgiveness? Revenge."
+            },
+            {
+                start: 96, end: 104,
+                original: "[Shylock] If a Christian wrong a Jew, what should his sufferance be by Christian example?",
+                translation: "[Shylock] If a Christian wrongs a Jew, what should his tolerance be, following the Christian example?"
+            },
+            {
+                start: 105, end: 108,
+                original: "[Shylock] Why, revenge.",
+                translation: "[Shylock] Of course, revenge."
+            },
+            {
+                start: 109, end: 119,
+                original: "[Shylock] The villainy you teach me I will execute and it shall go hard but I will better the instruction.",
+                translation: "[Shylock] The evil that you teach me, I will carry out, and it will be a hard task, but I will improve upon the lesson."
+            }
+        ];
+
+        let lastSubtitle = null;
+
+        video.addEventListener('timeupdate', () => {
+            const currentTime = video.currentTime;
+            let currentSubtitle = null;
+
+            for (const subtitle of subtitles) {
+                if (currentTime >= subtitle.start && currentTime <= subtitle.end) {
+                    currentSubtitle = subtitle;
+                    break;
+                }
+            }
+
+            if (currentSubtitle !== lastSubtitle) {
+                if (currentSubtitle) {
+                    originalTextElement.innerHTML = currentSubtitle.original;
+                    translationTextElement.innerHTML = currentSubtitle.translation;
+                } else {
+                    originalTextElement.innerHTML = "";
+                    translationTextElement.innerHTML = "";
+                }
+                lastSubtitle = currentSubtitle;
+            }
+        });
+    </script>
+</body>
+</html>
